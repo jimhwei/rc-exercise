@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "parcels/debug.log",
+            "filename": "/Users/jwei/Projects/ratio_django_api/takehome/parcels/views.log",
         },
     },
     "loggers": {
