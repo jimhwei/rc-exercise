@@ -7,7 +7,7 @@ from django.db import models
 # Comment on how you update a geospatial dataset when new data arrives. How would you handle conflicts or duplicate entries?
 
 class Parcels(models.Model):
-    id = models.CharField(primary_key=True, unique=True)
+    id = models.CharField(primary_key=True, unique=True, max_length=50)
     proj_name = models.CharField(max_length=255)
     area = models.FloatField()
     status = models.CharField(max_length=255)
