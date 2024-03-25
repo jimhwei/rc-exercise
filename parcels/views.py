@@ -102,10 +102,10 @@ def filter_parcels_by_features(request):
 
 
 
-# from django.contrib.gis.db.models.functions import Distance
-# from django.contrib.gis.geos import fromstr
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.geos import fromstr
 
-# from parcels.models import Parcel
+from parcels.models import Parcels
 from geopy.distance import geodesic as GD
 
 def calculate_centroid(): 
@@ -163,6 +163,6 @@ def locate_nearby_parcels(request):
     
     # point = fromstr(f'POINT({lon} {lat})', srid=4326)
     # print(point)
-    # nearby_parcels = Parcel.objects.annotate(distance=Distance('geometry', point)).filter(distance__lte=distance_km)
+    # nearby_parcels = Parcels.objects.annotate(distance=Distance('geometry', point)).filter(distance__lte=distance_km)
     # data = list(nearby_parcels.values('parcel_id', 'address', 'distance'))
     return JsonResponse(located_features, safe=False)
