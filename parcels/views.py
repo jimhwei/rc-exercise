@@ -3,9 +3,9 @@ from django.http import JsonResponse
 import json
 
 # Following a YouTube tutorial... TODO Understand this??
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+# from rest_framework.decorators import api_view, permission_classes
+# from rest_framework.response import Response
+# from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 import logging
@@ -71,8 +71,8 @@ def filter_features(flattened_features, criteria):
             filtered_features.append(feature)
     return filtered_features
 
-@api_view()
-@permission_classes([AllowAny])
+# @api_view()
+# @permission_classes([AllowAny])
 def filter_parcels_by_features(request):
     
     # Note: The request payload should be flexible so that customers can have different filters.
@@ -100,6 +100,36 @@ def filter_parcels_by_features(request):
     return JsonResponse(output_data, safe=False)
 
 
+
+
+# from django.contrib.gis.db.models.functions import Distance
+# from django.contrib.gis.geos import fromstr
+
+# from parcels.models import Parcel
+from geopy.distance import geodesic as GD
+
+def calculate_centroid(): 
+        
+    # TODO remove hard coding of dataset?
+    dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
+    flat_dataset = flatten_features(dataset)
+    
+    for polygon in flat_dataset:
+        # Calculate the sum of each dimension
+        coords = polygon['geometry']['coordinates'][0][0]
+        
+        sum_x = sum(coord[0] for coord in coords)
+        sum_y = sum(coord[1] for coord in coords)
+        
+        # Calculate the mean of each dimension
+        mean_x = sum_x / len(coords)
+        mean_y = sum_y / len(coords)
+        
+        polygon['centroid']=(mean_y, mean_x)
+    
+    return flat_dataset
+
+
 def locate_nearby_parcels(request):
     
     # Test if requests are empty, or invalid
@@ -112,5 +142,27 @@ def locate_nearby_parcels(request):
     # Maybe using some kind of tool or third party library (geopy)
         # find the centroid of all available properties
         # use some kind of caluclation between xys between all centroids
-        
-    pass
+    
+    q = calculate_centroid()
+    id = int(request.GET.get('id', 0)) #TODO assuming it is an int
+    lat,lon = q[id]['centroid']
+    # TODO we can't have both id and lat logn at once
+    if not id:
+        lat = float(request.GET.get('lat')) #43.64436663845263
+        lon = float(request.GET.get('lon')) #-79.39299031747248
+    distance_km = float(request.GET.get('distance', 1))  # Default to 1 km #TODO this is a string
+    # print(lat, lon, distance_km)
+    # print(type(lat), type(lon), type(distance_km))
+    
+    selection =(lat, lon)
+    
+    located_features = []
+    for shape in q:
+        if GD(selection, shape['centroid']).km < distance_km: # Geodesic distance
+            located_features.append(shape)
+    
+    # point = fromstr(f'POINT({lon} {lat})', srid=4326)
+    # print(point)
+    # nearby_parcels = Parcel.objects.annotate(distance=Distance('geometry', point)).filter(distance__lte=distance_km)
+    # data = list(nearby_parcels.values('parcel_id', 'address', 'distance'))
+    return JsonResponse(located_features, safe=False)
