@@ -2,11 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 
-# Following a YouTube tutorial... TODO Understand this??
-# from rest_framework.decorators import api_view, permission_classes
-# from rest_framework.response import Response
-# from rest_framework.permissions import AllowAny, IsAuthenticated
-
 
 import logging
 logger = logging.getLogger(__name__)
@@ -71,14 +66,28 @@ def filter_features(flattened_features, criteria):
             filtered_features.append(feature)
     return filtered_features
 
-# @api_view()
-# @permission_classes([AllowAny])
+
+
 def filter_parcels_by_features(request):
     
     # Note: The request payload should be flexible so that customers can have different filters.
-    area_sf = float(request.query_params['area_sf']) #TODO How to handle cases where no entry?
-    height_m = float(request.query_params['height_m'])
-    message = ("area_sf: " + str(area_sf), "height_m: " + str(height_m)) # Todo Debugging
+    try:
+        print(request.GET)
+        id = int(request.GET.get('id')) #TODO assuming it is an int
+        area = float(request.GET.get('area'))
+        area_sf = float(request.GET.get('area_sf'))
+        height_m = float(request.GET.get('height_m'))
+        
+        message = ("area_sf: " + str(area_sf), "height_m: " + str(height_m)) # Todo Debugging
+        print(message)
+        
+    except ValueError:
+        # TODO never gets executed because always a default value
+        return JsonResponse({'error': 'Invalid parameters received. Recheck parameters'}, status=400)
+
+    except TypeError:
+        return JsonResponse({'error': 'Parameter not found, please check your parameter'}, status=400)
+
     
     # The request is received and the parameters are extracted. 
     dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
@@ -94,8 +103,6 @@ def filter_parcels_by_features(request):
     
     # Test if requests are empty, or invalid
     # Filters data as needed based on one, two criteria, using a list comprehension perhaps
-    
-    # Return 
     
     return JsonResponse(output_data, safe=False)
 
