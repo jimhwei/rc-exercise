@@ -226,7 +226,6 @@ def locate_nearby_parcels(request):
     # Continue depending on input
     try:
         if id:
-            q = calculate_centroid(dataset)
             selection = q[id]['centroid']
         else:
             selection =(float(lat), float(lon))  
