@@ -56,74 +56,61 @@ def filter_features(flattened_features, criteria):
     filtered_features = []
     for feature in flattened_features:
         match = True
-        for key, (operation, value) in criteria.items():
-            if key in feature:
-                if operation == "greater_than" and not feature[key] > value:
-                    match = False
-                    break
-                # TODO Add other operations as necessary
+        for key, value in criteria.items():
+            if key in feature and feature[key] <= value:
+                match = False
+                break
         if match:
             filtered_features.append(feature)
     return filtered_features
 
 
-
 def filter_parcels_by_features(request):
     
     # Note: The request payload should be flexible so that customers can have different filters.
-    try:
-        print(request.GET)
-        # id = int(request.GET.get('id')) #TODO assuming it is an int
-        # area = float(request.GET.get('area'))
-        # area_sf = float(request.GET.get('area_sf'))
-        # height_m = float(request.GET.get('height_m'))
-        
-        # Initialize a dictionary to hold validated parameters
-        validated_params = {}
-        
-        expected_params = {
-        'area': float,
-        'area_sf': float,
-        'height_m': float,
-        'density': float,
-        }
-            
-        for param, expected_type in expected_params.items():
-            param_value = request.GET.get(param)
-            if param_value is not None:
-                try:
-                    # Convert parameter to the expected type
-                    validated_params[param] = expected_type(param_value)
-                except ValueError:
-                    # Return an error if the conversion fails
-                    return JsonResponse({'error': f'Invalid format for parameter: {param}. Expected a {expected_type.__name__}.'}, status=400)
-
-            print("Validated parameters:", validated_params)
-        
-    except ValueError:
-        # TODO never gets executed because always a default value
-        return JsonResponse({'error': 'Invalid parameters received. Recheck parameters'}, status=400)
-
-    except TypeError:
-        return JsonResponse({'error': 'Parameter not found, please check your parameter'}, status=400)
-
+    # I had planned to hard code each value to a value like below and assign default values    
+    # area_sf = float(request.GET.get('area_sf', 1000))
+    # height_m = float(request.GET.get('height_m', 100))
+    # and so on...
     
-    # The request is received and the parameters are extracted. 
+    # But dictionary requires key value pairs to be added much easier
+    expected_params = {
+    'area_sf': float,
+    'height_m': float,
+    'density': float,
+    # and so on
+    }
+
+    # Check for any unexpected values and return error.
+    for param in request.GET.keys():
+        if param not in expected_params:
+            return JsonResponse({'error': f'Unexpected parameter: "{param}". Please check the parameters.'}, status=400)
+    
+    criteria = {}
+    for param, expected_type in expected_params.items():
+        param_value = request.GET.get(param)  # Fetches the parameter value if present, else None
+
+        # Proceed only if the parameter was provided in the request
+        if param_value is not None:
+            try:
+                # Attempt to convert parameter to the expected type and add to criteria
+                criteria[param] = expected_type(param_value)
+            except ValueError:
+                # If conversion fails, return an error
+                return JsonResponse({'error': f'Invalid format for parameter: {param}. Expected a {expected_type.__name__}.'}, status=400)
+
+    print("Criteria:", criteria)
+
+    # Validate dataset
     dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
     
-    # flat_dataset = flatten_features(dataset)
-    # criteria = {
-    # 'area': ('greater_than', area_sf),
-    # 'height': ('greater_than', height_m),
-    # }
-
-    # output_data = filter_features(flat_dataset, criteria)
+    # Our dataset is in a geojson format, easier to deal with if dataset was flat
+    # Ideally we would use a spatial database and query them that way. 
+    flat_dataset = flatten_features(dataset)
+    output_data = filter_features(flat_dataset, criteria)
     
     
-    # # Test if requests are empty, or invalid
-    # # Filters data as needed based on one, two criteria, using a list comprehension perhaps
-    
-    return JsonResponse(validated_params, safe=False)
+    return JsonResponse(output_data, safe=False)
 
 
 
