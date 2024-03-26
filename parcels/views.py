@@ -135,7 +135,6 @@ def filter_parcels_by_features(request):
                 # If conversion fails, return an error
                 return JsonResponse({'error': f'Invalid format for parameter: {param}. Expected a {expected_type.__name__}.'}, status=400)
 
-    logging.debug("Criteria:", criteria)
 
     # Validate dataset
     dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
@@ -143,6 +142,7 @@ def filter_parcels_by_features(request):
     # Our dataset is in a geojson format, easier to deal with if dataset was flat
     # Ideally we would use a spatial database and query them that way. 
     flat_dataset = flatten_features(dataset)
+    logging.debug("Criteria: "+ str(criteria))
     output_data = filter_features(flat_dataset, criteria)
     
     
@@ -206,7 +206,7 @@ def locate_nearby_parcels(request):
         lon = request.GET.get('lon', None) # -79.393
         distance_km = float(request.GET.get('dist', None))
 
-        req_msg = "paramaters: id: " + str(id) + "lat: " + str(lat) + "lon: " + str(lon) + "distance_km: " + str(distance_km)
+        req_msg = "paramaters: id: " + str(id) + ", lat: " + str(lat) + ", lon: " + str(lon) + ", distance_km: " + str(distance_km)
         logging.debug(req_msg)
 
     

@@ -1,11 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 
-# Create your models here.
-
-# To be incorporated with a database like postgresql postgis TODO
-
-# Comment on how you update a geospatial dataset when new data arrives. How would you handle conflicts or duplicate entries?
 
 class Parcels(models.Model):
     id = models.CharField(primary_key=True, unique=True, max_length=50)
@@ -23,7 +18,7 @@ class Parcels(models.Model):
     sold_per = models.FloatField()
     type = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
-    geometry = gis_models.PolygonField() # Helps store geometry
+    geometry = gis_models.PolygonField(null=True)
     
     def __str__(self):
         return self.name
