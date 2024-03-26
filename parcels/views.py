@@ -3,22 +3,37 @@ import json
 from geopy.distance import geodesic as GD
 import logging
 
+# TODO Logging? Log Path?
 logger = logging.getLogger(__name__)
-logging.basicConfig(format='%(asctime)s - %(message)s', filename='/Users/jwei/Projects/ratio_django_api/takehome/parcels/views.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s - %(message)s', filename='./views.log', encoding='utf-8', level=logging.DEBUG)
 
-# Create your views here.
 
-# function to validate the incoming json with a standard template
+def has_empty_values(feat): 
+    """Checks for empty or None values in a dictionary.
 
-def has_empty_values(d): 
-    for value in d.values():
-        if value == "" or value == None:
-            logging.warning("Empty value") # TODO but for which key?
+    Parameters:
+        GeoJSON File in local directory.
+
+    Returns:
+        dict: The GeoJSON data if valid and no empty properties are found; otherwise, logs an error.
+    """
+    
+    for key, value in feat.items():
+        if value == "" or value is None:
+            logging.warning(f"Empty value for key: {key}")
             return True
     return False
 
-# Tests if data is valid geojson
-def is_valid_geojson(filepath):     # TODO see security note regarding filepath...
+
+def is_valid_geojson(filepath):
+    """Validates a GeoJSON file's properties for empty values.
+
+    Parameters:
+        GeoJSON File in local directory.
+
+    Returns:
+        dict: The GeoJSON data if valid and no empty properties are found; otherwise, logs an error.
+    """
     
     try: 
         with open(filepath) as f:
@@ -31,16 +46,20 @@ def is_valid_geojson(filepath):     # TODO see security note regarding filepath.
     
     except Exception as e:
         logging.error(f"Exception occured: {e}")
-
-    
-    # TODO validates the data 
-        # a.	Check for valid data, but you have to know what is valid data first
-        # b.	Check if there will be error cases. E.g., strings, negative integers, is null, 0
-        #     i.	If coordinate is invalid, then record is invalid
-        # c.	Consider default value if necessary
+        return JsonResponse({'error': 'Invalid GeoJSON file'}, status=400)
 
 
 def flatten_features(data):
+    """
+    Flattens a GeoJSON 'features' array into a list of features with geometry included.
+
+    Parameters:
+        data (dict): GeoJSON data containing a 'features' list.
+
+    Returns:
+        list: A list of flattened features, each including properties and geometry.
+    """
+
     flattened = []
     for feature in data['features']:
         flat_feature = feature['properties']  # Assuming properties are already flat
@@ -51,7 +70,15 @@ def flatten_features(data):
 
 def filter_features(flattened_features, criteria):
     """
-    Filters a list of features based on specified criteria.
+    Filters a list of flattened features based on specified criteria.
+
+    Parameters:
+        flattened_features (list): List of flattened features to filter.
+        criteria (dict): A dictionary where each key-value pair represents a filter criterion. Currently
+    only returns greater than criteria.
+
+    Returns:
+        list: A list of features that match all the specified criteria.
     """
     filtered_features = []
     for feature in flattened_features:
@@ -66,6 +93,15 @@ def filter_features(flattened_features, criteria):
 
 
 def filter_parcels_by_features(request):
+    """
+    Processes a request to filter parcels based on features specified in the request parameters.
+
+    Parameters:
+        request (HttpRequest): The request object containing GET parameters for filtering.
+
+    Returns:
+        JsonResponse: A JSON response containing either the filtered dataset or an error message.
+    """
     
     # Note: The request payload should be flexible so that customers can have different filters.
     # I had planned to hard code each value to a value like below and assign default values    
@@ -78,7 +114,7 @@ def filter_parcels_by_features(request):
     'area_sf': float,
     'height_m': float,
     'density': float,
-    # and so on
+    # and so on...
     }
 
     # Check for any unexpected values and return error.
@@ -102,7 +138,7 @@ def filter_parcels_by_features(request):
     print("Criteria:", criteria)
 
     # Validate dataset
-    dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
+    dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
     
     # Our dataset is in a geojson format, easier to deal with if dataset was flat
     # Ideally we would use a spatial database and query them that way. 
@@ -114,6 +150,18 @@ def filter_parcels_by_features(request):
 
 
 def calculate_centroid(data): 
+    """
+    Calculates the centroid for each polygon feature in a flattened dataset.
+    The function calculates the centroid of each polygon by averaging the coordinates of 
+    its vertices. Adds the centroid as a new key-value pair to each feature's dictionary.
+
+    Parameters:
+        data (dict): Flattened geojson format.
+
+    Returns:
+        list: A list of flattened features with an added 'centroid' key for each, representing
+    the centroid's coordinates.
+    """
         
     flat_dataset = flatten_features(data)
     
@@ -134,9 +182,20 @@ def calculate_centroid(data):
 
 
 def locate_nearby_parcels(request):
+    """
+    Identifies and returns parcels within a specified distance from a given point or parcel ID.
+    It returns nearby parcels based on the geodesic distance from the specified point or the centroid of
+    the parcel associated with the given ID.
+
+    Parameters:
+        request (HttpRequest): The request object containing GET parameters for 'id', 'lat', 'lon', and 'dist'.
+
+    Returns:
+        JsonResponse: A JSON response containing a list of nearby parcels if successful; otherwise, returns
+    an error JSON with a specific error message. 
+    """
     
-    # TODO remove hard coding of dataset?
-    dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
+    dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
     q = calculate_centroid(dataset)
     
     try:
@@ -166,10 +225,11 @@ def locate_nearby_parcels(request):
     
     else:
         selection =(float(lat), float(lon))
-        
+    
+    # Checks compare centroid of all records and compares it with distance parameter
     located_features = []
     for shape in q:
         if GD(selection, shape['centroid']).km < float(distance_km): # Geodesic distance
             located_features.append(shape)
             
-    return JsonResponse(located_features, safe=False)    
+    return JsonResponse(located_features, safe=False)
