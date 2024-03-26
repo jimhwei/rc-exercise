@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db import models as gis_models
 
 # Create your models here.
 
@@ -22,6 +23,7 @@ class Parcels(models.Model):
     sold_per = models.FloatField()
     type = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
+    geometry = gis_models.PolygonField() # Helps store geometry
     
     def __str__(self):
         return self.name
