@@ -73,13 +73,32 @@ def filter_parcels_by_features(request):
     # Note: The request payload should be flexible so that customers can have different filters.
     try:
         print(request.GET)
-        id = int(request.GET.get('id')) #TODO assuming it is an int
-        area = float(request.GET.get('area'))
-        area_sf = float(request.GET.get('area_sf'))
-        height_m = float(request.GET.get('height_m'))
+        # id = int(request.GET.get('id')) #TODO assuming it is an int
+        # area = float(request.GET.get('area'))
+        # area_sf = float(request.GET.get('area_sf'))
+        # height_m = float(request.GET.get('height_m'))
         
-        message = ("area_sf: " + str(area_sf), "height_m: " + str(height_m)) # Todo Debugging
-        print(message)
+        # Initialize a dictionary to hold validated parameters
+        validated_params = {}
+        
+        expected_params = {
+        'area': float,
+        'area_sf': float,
+        'height_m': float,
+        'density': float,
+        }
+            
+        for param, expected_type in expected_params.items():
+            param_value = request.GET.get(param)
+            if param_value is not None:
+                try:
+                    # Convert parameter to the expected type
+                    validated_params[param] = expected_type(param_value)
+                except ValueError:
+                    # Return an error if the conversion fails
+                    return JsonResponse({'error': f'Invalid format for parameter: {param}. Expected a {expected_type.__name__}.'}, status=400)
+
+            print("Validated parameters:", validated_params)
         
     except ValueError:
         # TODO never gets executed because always a default value
@@ -92,84 +111,84 @@ def filter_parcels_by_features(request):
     # The request is received and the parameters are extracted. 
     dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
     
-    flat_dataset = flatten_features(dataset)
-    criteria = {
-    'area': ('greater_than', area_sf),
-    'height': ('greater_than', height_m),
-    }
+    # flat_dataset = flatten_features(dataset)
+    # criteria = {
+    # 'area': ('greater_than', area_sf),
+    # 'height': ('greater_than', height_m),
+    # }
 
-    output_data = filter_features(flat_dataset, criteria)
+    # output_data = filter_features(flat_dataset, criteria)
     
     
-    # Test if requests are empty, or invalid
-    # Filters data as needed based on one, two criteria, using a list comprehension perhaps
+    # # Test if requests are empty, or invalid
+    # # Filters data as needed based on one, two criteria, using a list comprehension perhaps
     
-    return JsonResponse(output_data, safe=False)
+    return JsonResponse(validated_params, safe=False)
 
 
 
 
-from django.contrib.gis.db.models.functions import Distance
-from django.contrib.gis.geos import fromstr
+# from django.contrib.gis.db.models.functions import Distance
+# from django.contrib.gis.geos import fromstr
 
-from parcels.models import Parcels
-from geopy.distance import geodesic as GD
+# from parcels.models import Parcels
+# from geopy.distance import geodesic as GD
 
-def calculate_centroid(): 
+# def calculate_centroid(): 
         
-    # TODO remove hard coding of dataset?
-    dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
-    flat_dataset = flatten_features(dataset)
+#     # TODO remove hard coding of dataset?
+#     dataset = is_valid_geojson('/Users/jwei/Projects/ratio_django_api/ratio_city_toronto_example_dataset.geojson')
+#     flat_dataset = flatten_features(dataset)
     
-    for polygon in flat_dataset:
-        # Calculate the sum of each dimension
-        coords = polygon['geometry']['coordinates'][0][0]
+#     for polygon in flat_dataset:
+#         # Calculate the sum of each dimension
+#         coords = polygon['geometry']['coordinates'][0][0]
         
-        sum_x = sum(coord[0] for coord in coords)
-        sum_y = sum(coord[1] for coord in coords)
+#         sum_x = sum(coord[0] for coord in coords)
+#         sum_y = sum(coord[1] for coord in coords)
         
-        # Calculate the mean of each dimension
-        mean_x = sum_x / len(coords)
-        mean_y = sum_y / len(coords)
+#         # Calculate the mean of each dimension
+#         mean_x = sum_x / len(coords)
+#         mean_y = sum_y / len(coords)
         
-        polygon['centroid']=(mean_y, mean_x)
+#         polygon['centroid']=(mean_y, mean_x)
     
-    return flat_dataset
+#     return flat_dataset
 
 
-def locate_nearby_parcels(request):
+# def locate_nearby_parcels(request):
     
-    # Test if requests are empty, or invalid
+#     # Test if requests are empty, or invalid
     
-    # Tests if user tries to submit both id and geometry
-    # After receiving data
-        # Checks if using an id
-        # Or checks if using a geometry point from a "Map"
+#     # Tests if user tries to submit both id and geometry
+#     # After receiving data
+#         # Checks if using an id
+#         # Or checks if using a geometry point from a "Map"
 
-    # Maybe using some kind of tool or third party library (geopy)
-        # find the centroid of all available properties
-        # use some kind of caluclation between xys between all centroids
+#     # Maybe using some kind of tool or third party library (geopy)
+#         # find the centroid of all available properties
+#         # use some kind of caluclation between xys between all centroids
     
-    q = calculate_centroid()
-    id = int(request.GET.get('id', 0)) #TODO assuming it is an int
-    lat,lon = q[id]['centroid']
-    # TODO we can't have both id and lat logn at once
-    if not id:
-        lat = float(request.GET.get('lat')) #43.64436663845263
-        lon = float(request.GET.get('lon')) #-79.39299031747248
-    distance_km = float(request.GET.get('distance', 1))  # Default to 1 km #TODO this is a string
-    # print(lat, lon, distance_km)
-    # print(type(lat), type(lon), type(distance_km))
+#     q = calculate_centroid()
+#     id = int(request.GET.get('id', 0)) #TODO assuming it is an int
+#     lat,lon = q[id]['centroid']
+#     # TODO we can't have both id and lat logn at once
+#     if not id:
+#         lat = float(request.GET.get('lat')) #43.64436663845263
+#         lon = float(request.GET.get('lon')) #-79.39299031747248
+#     distance_km = float(request.GET.get('distance', 1))  # Default to 1 km #TODO this is a string
+#     # print(lat, lon, distance_km)
+#     # print(type(lat), type(lon), type(distance_km))
     
-    selection =(lat, lon)
+#     selection =(lat, lon)
     
-    located_features = []
-    for shape in q:
-        if GD(selection, shape['centroid']).km < distance_km: # Geodesic distance
-            located_features.append(shape)
+#     located_features = []
+#     for shape in q:
+#         if GD(selection, shape['centroid']).km < distance_km: # Geodesic distance
+#             located_features.append(shape)
     
-    # point = fromstr(f'POINT({lon} {lat})', srid=4326)
-    # print(point)
-    # nearby_parcels = Parcels.objects.annotate(distance=Distance('geometry', point)).filter(distance__lte=distance_km)
-    # data = list(nearby_parcels.values('parcel_id', 'address', 'distance'))
-    return JsonResponse(located_features, safe=False)
+#     # point = fromstr(f'POINT({lon} {lat})', srid=4326)
+#     # print(point)
+#     # nearby_parcels = Parcels.objects.annotate(distance=Distance('geometry', point)).filter(distance__lte=distance_km)
+#     # data = list(nearby_parcels.values('parcel_id', 'address', 'distance'))
+#     return JsonResponse(located_features, safe=False)
