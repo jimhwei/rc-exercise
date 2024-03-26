@@ -1,12 +1,10 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 import json
-
-
+from geopy.distance import geodesic as GD
 import logging
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', filename='/Users/jwei/Projects/ratio_django_api/takehome/parcels/views.log', encoding='utf-8', level=logging.DEBUG)
-from geopy.distance import geodesic as GD
 
 # Create your views here.
 
