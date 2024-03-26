@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
                     filename='./views.log', encoding='utf-8', level=logging.DEBUG)
 
 
-def has_empty_values(feat): 
+def has_empty_values(feat_dict): 
     """Checks for empty or None values in a dictionary.
 
     Parameters:
@@ -18,9 +18,9 @@ def has_empty_values(feat):
         dict: The GeoJSON data if valid and no empty properties are found; otherwise, logs an error.
     """
     
-    for key, value in feat.items():
+    for key, value in feat_dict.items():
         if value == "" or value is None:
-            logging.warning(f"Empty value for key: {key}")
+            logger.warning(f"Empty value for key: {key}")
             return True
     return False
 
@@ -45,9 +45,8 @@ def is_valid_geojson(filepath):
         return data
     
     except Exception as e:
-        logging.error(f"Exception occured: {e}")
-        return JsonResponse({'error': 'Invalid GeoJSON file'}, status=400)
-
+        logger.error(f"Exception occured: {e}")
+        return None
 
 def flatten_features(data):
     """
@@ -142,7 +141,7 @@ def filter_parcels_by_features(request):
     # Our dataset is in a geojson format, easier to deal with if dataset was flat
     # Ideally we would use a spatial database and query them that way. 
     flat_dataset = flatten_features(dataset)
-    logging.debug("Criteria: "+ str(criteria))
+    logger.debug("Criteria: "+ str(criteria))
     output_data = filter_features(flat_dataset, criteria)
     
     
@@ -195,7 +194,7 @@ def locate_nearby_parcels(request):
     an error JSON with a specific error message. 
     """
     
-    logging.debug('Locate Nearby Parcels')
+    logger.debug('Locate Nearby Parcels')
     
     dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
     q = calculate_centroid(dataset)
@@ -207,14 +206,14 @@ def locate_nearby_parcels(request):
         distance_km = float(request.GET.get('dist', None))
 
         req_msg = "paramaters: id: " + str(id) + ", lat: " + str(lat) + ", lon: " + str(lon) + ", distance_km: " + str(distance_km)
-        logging.debug(req_msg)
+        logger.debug(req_msg)
 
     
     # Attempt to catch invalid parameters
     except ValueError:
-        return JsonResponse({'ValueError': 'Invalid parameter entered'}, status=400)
+        return JsonResponse({'error': 'ValueError, Invalid parameter entered'}, status=400)
     except TypeError:
-        return JsonResponse({'TypeError': 'Invalid parameter entered'}, status=400)
+        return JsonResponse({'error': 'TypeError, Invalid parameter entered'}, status=400)
     
     # Checks if user tries to submit both id and geometry
     if id and (lat or lon):
@@ -225,12 +224,14 @@ def locate_nearby_parcels(request):
         return JsonResponse({'error': 'Please provide a distance parameter.'}, status=400)
     
     # Continue depending on input
-    if id:
-        q = calculate_centroid(dataset)
-        selection = q[id]['centroid']
-    
-    else:
-        selection =(float(lat), float(lon))
+    try:
+        if id:
+            q = calculate_centroid(dataset)
+            selection = q[id]['centroid']
+        else:
+            selection =(float(lat), float(lon))  
+    except:
+        return JsonResponse({'error': 'Invalid parameter format for latitude, longitude, or distance.'}, status=400)
     
     # Checks compare centroid of all records and compares it with distance parameter
     located_features = []
