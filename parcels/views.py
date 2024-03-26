@@ -3,9 +3,9 @@ import json
 from geopy.distance import geodesic as GD
 import logging
 
-# TODO Logging? Log Path?
 logger = logging.getLogger(__name__)
-logging.basicConfig(format='%(asctime)s - %(message)s', filename='./views.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s - %(message)s', 
+                    filename='./views.log', encoding='utf-8', level=logging.DEBUG)
 
 
 def has_empty_values(feat): 
@@ -135,7 +135,7 @@ def filter_parcels_by_features(request):
                 # If conversion fails, return an error
                 return JsonResponse({'error': f'Invalid format for parameter: {param}. Expected a {expected_type.__name__}.'}, status=400)
 
-    print("Criteria:", criteria)
+    logging.debug("Criteria:", criteria)
 
     # Validate dataset
     dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
@@ -195,20 +195,26 @@ def locate_nearby_parcels(request):
     an error JSON with a specific error message. 
     """
     
+    logging.debug('Locate Nearby Parcels')
+    
     dataset = is_valid_geojson('./ratio_city_toronto_example_dataset.geojson')
     q = calculate_centroid(dataset)
     
     try:
         id = int(request.GET.get('id', 0))
-        lat = float(request.GET.get('lat', None)) #43.64436663845263
-        lon = float(request.GET.get('lon', None)) #-79.39299031747248
+        lat = request.GET.get('lat', None) # 43.644
+        lon = request.GET.get('lon', None) # -79.393
         distance_km = float(request.GET.get('dist', None))
+
+        req_msg = "paramaters: id: " + str(id) + "lat: " + str(lat) + "lon: " + str(lon) + "distance_km: " + str(distance_km)
+        logging.debug(req_msg)
+
     
     # Attempt to catch invalid parameters
     except ValueError:
-        return JsonResponse({'error': 'Invalid parameter entered'}, status=400)
+        return JsonResponse({'ValueError': 'Invalid parameter entered'}, status=400)
     except TypeError:
-        return JsonResponse({'error': 'Invalid parameter entered'}, status=400)
+        return JsonResponse({'TypeError': 'Invalid parameter entered'}, status=400)
     
     # Checks if user tries to submit both id and geometry
     if id and (lat or lon):
