@@ -2,7 +2,6 @@ from django.urls import include, path
 from .views import ParcelCreate, ParcelList, ParcelDetail, ParcelUpdate, ParcelDelete
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('create/', ParcelCreate.as_view(), name='create-Parcel'),
     path('', ParcelList.as_view()),
     path('<int:pk>/', ParcelDetail.as_view(), name='retrieve-Parcel'),
