@@ -1,3 +1,36 @@
+from django.shortcuts import render
+from .models import Parcel
+from rest_framework import generics
+from .serializers import ParcelSerializer
+
+class ParcelCreate(generics.CreateAPIView):
+    # API endpoint that allows creation of a new Parcel
+    queryset = Parcel.objects.all(),
+    serializer_class = ParcelSerializer
+
+
+class ParcelList(generics.ListAPIView):
+    # API endpoint that allows Parcel to be viewed.
+    queryset = Parcel.objects.all()
+    serializer_class = ParcelSerializer
+
+class ParcelDetail(generics.RetrieveAPIView):
+    # API endpoint that returns a single Parcel by pk.
+    queryset = Parcel.objects.all()
+    serializer_class = ParcelSerializer
+    
+class ParcelUpdate(generics.RetrieveUpdateAPIView):
+    # API endpoint that allows a Parcel record to be updated.
+    queryset = Parcel.objects.all()
+    serializer_class = ParcelSerializer
+
+class ParcelDelete(generics.RetrieveDestroyAPIView):
+    # API endpoint that allows a Parcel record to be deleted.
+    queryset = Parcel.objects.all()
+    serializer_class = ParcelSerializer
+
+# Old below
+################################################################################################
 from django.http import JsonResponse
 import json
 from geopy.distance import geodesic as GD
@@ -6,7 +39,6 @@ import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(message)s', 
                     filename='./views.log', encoding='utf-8', level=logging.DEBUG)
-
 
 def has_empty_values(feat_dict): 
     """Checks for empty or None values in a dictionary.
@@ -102,7 +134,7 @@ def filter_parcels_by_features(request):
         JsonResponse: A JSON response containing either the filtered dataset or an error message.
     """
     
-    # Note: The request payload should be flexible so that customers can have different filters.
+    # Note: The request payload should be flexible so that Parcels can have different filters.
     # I had planned to hard code each value to a value like below and assign default values    
     # area_sf = float(request.GET.get('area_sf', 1000))
     # height_m = float(request.GET.get('height_m', 100))

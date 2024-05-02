@@ -18,6 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from parcels.views import filter_parcels_by_features, locate_nearby_parcels
 
+from parcels.views import ParcelCreate, ParcelList, ParcelDetail, ParcelUpdate, ParcelDelete
+
+
+
+# Old below
+################################################################################################
 
 urlpatterns = [
     path('admin/', admin.site.urls),

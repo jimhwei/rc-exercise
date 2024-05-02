@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.gis.db import models as gis_models
 
 
-class Parcels(models.Model):
+class Parcel(models.Model):
     # id = models.CharField(primary_key=True, unique=True, max_length=50)
     proj_name = models.CharField(max_length=255)
     # area = models.FloatField()
