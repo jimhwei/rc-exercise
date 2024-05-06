@@ -19,31 +19,43 @@ class ParcelList(APIView):
         return Response(serializer.data)
     
     
-class ParcelDetail(APIView):
+class ParcelDetailByKey(APIView):
     
-    def get_object(self, pk):
-        try:
-            return Parcel.objects.get(pk=pk)
-        except Parcel.DoesNotExist:
-            raise Http404
-
     def get(self, request, pk, format=None):
-        parcel = Parcel.objects.get(pk)
+        parcel = Parcel.objects.get(pk=pk)
         serializer = ParcelSerializer(parcel)
         return Response(serializer.data)
     
-    def put(self, request, pk, format=None):
-        parcel = self.get_object(pk)
-        serializer = ParcelSerializer(parcel, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class ParcelFilter(APIView):
+    
+    def get(self, request):
+        # print(request.GET)
+        # area_value = request.GET.get('area')
+        # if area_value is not None:
+        #     try:
+        #         area_value = int(area_value)
+        #     except:
+        #         return Response({'error': 'Invalid area value'}, status=400)
+        
+        print(request.data)
+        serializer = ParcelSerializer(data=request.data)
+        print(request.data)
+        parcel = Parcel.objects.filter(area__gt=3000)
+        serializer = ParcelSerializer(parcel, many=True)
+        return Response(serializer.data)
+    
+    # def put(self, request, pk, format=None):
+    #     parcel = self.get_object(pk)
+    #     serializer = ParcelSerializer(parcel, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        parcel = self.get_object(pk)
-        parcel.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def delete(self, request, pk, format=None):
+    #     parcel = self.get_object(pk)
+    #     parcel.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Class based views
 ################################################################################################

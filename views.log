@@ -5,3 +5,852 @@
 2024-05-06 13:54:57,266 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
 2024-05-06 13:55:17,294 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
 2024-05-06 13:56:24,603 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-06 13:59:35,456 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 13:59:52,482 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:04:21,674 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:04:27,407 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:05:29,030 - Internal Server Error: /parcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 19, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 523, in to_representation
+    for field in fields:
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `typeunits` is not valid for model `Parcel` in `parcels.serializers.ParcelSerializer`.
+2024-05-06 14:05:31,496 - Internal Server Error: /parcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 19, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 523, in to_representation
+    for field in fields:
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `typeunits` is not valid for model `Parcel` in `parcels.serializers.ParcelSerializer`.
+2024-05-06 14:05:33,163 - Not Found: /
+2024-05-06 14:05:38,239 - Internal Server Error: /parcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 19, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 523, in to_representation
+    for field in fields:
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `typeunits` is not valid for model `Parcel` in `parcels.serializers.ParcelSerializer`.
+2024-05-06 14:07:47,057 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-06 14:07:55,757 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 31, in get
+    parcel = Parcel.objects.get(pk)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1492, in build_filter
+    arg, value = filter_expr
+    ^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
+2024-05-06 14:07:55,893 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 31, in get
+    parcel = Parcel.objects.get(pk)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1492, in build_filter
+    arg, value = filter_expr
+    ^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
+2024-05-06 14:08:15,372 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:08:18,014 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 31, in get
+    parcel = Parcel.objects.get(pk)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1492, in build_filter
+    arg, value = filter_expr
+    ^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
+2024-05-06 14:08:35,089 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 31, in get
+    parcel = Parcel.objects.get(pk)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1492, in build_filter
+    arg, value = filter_expr
+    ^^^^^^^^^^
+TypeError: cannot unpack non-iterable int object
+2024-05-06 14:10:52,521 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:12:08,257 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:12:16,025 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 14:12:46,347 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:05:09,644 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:05:11,273 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:05:15,738 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 27, in get
+    parcel = Parcel.objects.get()
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+parcels.models.Parcel.MultipleObjectsReturned: get() returned more than one Parcel -- it returned 20!
+2024-05-06 15:05:38,684 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:05:41,337 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:05:43,464 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 439, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 106, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 29, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 472, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `id` on serializer `ParcelSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'id'.
+2024-05-06 15:05:46,999 - Internal Server Error: /parcels/1/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 439, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 106, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 29, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 472, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `id` on serializer `ParcelSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'id'.
+2024-05-06 15:05:56,413 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:06:02,165 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:08:59,568 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:10:28,386 - /Users/jimwei/Projects/RC Django API Exercise/parcels/urls.py changed, reloading.
+2024-05-06 15:10:34,044 - /Users/jimwei/Projects/RC Django API Exercise/parcels/urls.py changed, reloading.
+2024-05-06 15:10:40,732 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:17:30,945 - /Users/jimwei/Projects/RC Django API Exercise/parcels/urls.py changed, reloading.
+2024-05-06 15:17:51,312 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:18:03,197 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:18:16,084 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:18:25,912 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:18:57,297 - /Users/jimwei/Projects/RC Django API Exercise/parcels/urls.py changed, reloading.
+2024-05-06 15:20:05,979 - Internal Server Error: /parcelsfilter
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 439, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 106, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 35, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 472, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `id` on serializer `ParcelSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'id'.
+2024-05-06 15:20:12,953 - /Users/jimwei/Projects/RC Django API Exercise/parcels/urls.py changed, reloading.
+2024-05-06 15:20:14,309 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 439, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 106, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 35, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 472, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `id` on serializer `ParcelSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'id'.
+2024-05-06 15:20:48,531 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:20:50,554 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ParcelFilter.get() missing 1 required positional argument: 'pk'
+2024-05-06 15:20:58,436 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:20:59,980 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ParcelFilter.get() missing 1 required positional argument: 'pk'
+2024-05-06 15:21:18,186 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ParcelFilter.get() missing 1 required positional argument: 'pk'
+2024-05-06 15:21:57,666 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:22:02,907 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 439, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 106, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 35, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 525, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/fields.py", line 472, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `id` on serializer `ParcelSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'id'.
+2024-05-06 15:22:26,199 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:22:37,024 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:28:04,153 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:29:20,811 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:33:33,846 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:35:34,166 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:35:53,421 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:36:13,642 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:38:28,785 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:43:02,011 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:43:11,243 - Internal Server Error: /parcelsfilter/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 2021, in get_prep_value
+    return float(value)
+           ^^^^^^^^^^^^
+TypeError: float() argument must be a string or a real number, not 'QueryDict'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 33, in get
+    parcel = Parcel.objects.filter(area__gt=request.GET)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py", line 2023, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'area' expected a number but got <QueryDict: {'area': ['3000']}>.
+2024-05-06 15:43:25,373 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:46:30,467 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:46:39,266 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:57:51,252 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:58:23,582 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-06 15:58:54,103 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.

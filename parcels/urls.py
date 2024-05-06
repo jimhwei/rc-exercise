@@ -1,6 +1,6 @@
 from django.urls import include, path
 # from .views import ParcelCreate, ParcelList, ParcelDetail, ParcelUpdate, ParcelDelete
-from .views import ParcelList, ParcelDetail
+from .views import ParcelList, ParcelDetailByKey, ParcelFilter
 
 urlpatterns = [
     # path('create/', ParcelCreate.as_view(), name='create-Parcel'),
@@ -10,6 +10,8 @@ urlpatterns = [
     # path('delete/<int:pk>/', ParcelDelete.as_view(), name='delete-Parcel')
     
     path('parcels/', ParcelList.as_view()),
-    path('parcels/<int:pk>/', ParcelDetail.as_view()),
+    path('parcelsid/<int:pk>/', ParcelDetailByKey.as_view()),
+    path('parcelsfilter/', ParcelFilter.as_view()),
+    
 
 ]

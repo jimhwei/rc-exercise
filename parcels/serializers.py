@@ -9,5 +9,5 @@ class ParcelSerializer(serializers.ModelSerializer):
         # fields = ["proj_name", "status", 'geometry']
         
         fields = ["id","proj_name","status","geometry","address","area","area_sf",
-                  "building_f","density","gfa_sf","height_m","price","sold_per","storey","type"
+                  "building_f","density","gfa_sf","height_m","price","sold_per","storey","type",
                   "units"]
