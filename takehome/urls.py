@@ -24,7 +24,8 @@ from django.urls import path, include #new
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('parcel/', include('parcels.urls')), #new
+    # path('parcel/', include('parcels.urls')), #new
     path('filter/', filter_parcels_by_features, name='filter_parcels_by_features'),
-    path('locate/', locate_nearby_parcels, name='locate_nearby_parcels'),
+    # path('locate/', locate_nearby_parcels, name='locate_nearby_parcels'),
+    path('', include('parcels.urls'))
 ]
