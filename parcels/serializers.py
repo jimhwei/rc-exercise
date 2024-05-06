@@ -6,8 +6,8 @@ class ParcelSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Parcel
-        fields = ["proj_name", "status", 'geometry']
+        # fields = ["proj_name", "status", 'geometry']
         
-        # fields = ["id","proj_name","area","status","area_sf",
-        #           "building_f","height_m","storey","gfa_sf",
-        #           "density","price","sold_per","type","address",]
+        fields = ["id","proj_name","status","geometry","address","area","area_sf",
+                  "building_f","density","gfa_sf","height_m","price","sold_per","storey","type"
+                  "units"]
