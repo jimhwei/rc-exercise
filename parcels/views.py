@@ -29,20 +29,36 @@ class ParcelDetailByKey(APIView):
 class ParcelFilter(APIView):
     
     def get(self, request):
-        # print(request.GET)
-        # area_value = request.GET.get('area')
-        # if area_value is not None:
-        #     try:
-        #         area_value = int(area_value)
-        #     except:
-        #         return Response({'error': 'Invalid area value'}, status=400)
+        query_params = request.query_params
+        serializer = ParcelSerializer(data=query_params)
         
-        print(request.data)
-        serializer = ParcelSerializer(data=request.data)
-        print(request.data)
-        parcel = Parcel.objects.filter(area__gt=3000)
-        serializer = ParcelSerializer(parcel, many=True)
-        return Response(serializer.data)
+        filter_kwargs = {}
+
+        # Dynamically build filter conditions based on query parameters
+        for key, value in query_params.items():
+            if key.endswith('_gt'):
+                field_name = key[:-3]  # Strip '_gt' to get the field name
+                filter_kwargs[f'{field_name}__gt'] = value
+            elif key.endswith('_gte'):
+                field_name = key[:-4]  # Strip '_gte' to get the field name
+                filter_kwargs[f'{field_name}__gt'] = value
+            elif key.endswith('_lt'):
+                field_name = key[:-3]  # Strip '_lt' to get the field name
+                filter_kwargs[f'{field_name}__lt'] = value
+
+        print("filter kwargs: ", filter_kwargs)
+        if serializer.is_valid(): 
+            print("serializer.validated_data: ", serializer.validated_data)
+            # parcel = Parcel.objects.filter(**serializer.validated_data)
+            parcel = Parcel.objects.filter(**filter_kwargs)
+            print("filtered parcels: ", parcel)
+            # parcel = Parcel.objects.all()            
+        else:
+            print(serializer.errors)
+
+        # serializer = ParcelSerializer(data=request.data) # Only for POST?
+        response_serializer = ParcelSerializer(parcel, many=True)
+        return Response(response_serializer.data)
     
     # def put(self, request, pk, format=None):
     #     parcel = self.get_object(pk)
