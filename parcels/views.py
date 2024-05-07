@@ -2,63 +2,89 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 from .models import Parcel
 from .serializers import ParcelSerializer
 from rest_framework import status
 from django.http import Http404
 
 
-class ParcelList(APIView):
+@csrf_exempt # TODO understand what this does
+def parcel_list(request):
     """
-    View to list all parcels in the system.
-    
+    List all code snippets, or create a new snippet.
     """
-    def get(self, request):
+    if request.method == 'GET':
         parcels = Parcel.objects.all()
         serializer = ParcelSerializer(parcels, many=True)
-        return Response(serializer.data)
+        print("serializer: ", serializer)
+        filtered_parcels = Parcel.objects.filter(area_sf__gt=10000)
+        new_serializer = ParcelSerializer(filtered_parcels, many=True)
+        # print("parcel: ", parcel)
+
+        return JsonResponse(new_serializer.data, safe=False)  
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ParcelSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+# class ParcelList(APIView):
+#     """
+#     View to list all parcels in the system.
+    
+#     """
+#     def get(self, request):
+#         parcels = Parcel.objects.all()
+#         serializer = ParcelSerializer(parcels, many=True)
+#         return Response(serializer.data)
     
     
-class ParcelDetailByKey(APIView):
+# class ParcelDetailByKey(APIView):
     
-    def get(self, request, pk, format=None):
-        parcel = Parcel.objects.get(pk=pk)
-        serializer = ParcelSerializer(parcel)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         parcel = Parcel.objects.get(pk=pk)
+#         serializer = ParcelSerializer(parcel)
+#         return Response(serializer.data)
     
-class ParcelFilter(APIView):
+# class ParcelFilter(APIView):
     
-    def get(self, request):
-        query_params = request.query_params
-        serializer = ParcelSerializer(data=query_params)
+#     def get(self, request):
+#         query_params = request.query_params
+#         serializer = ParcelSerializer(data=query_params)
         
-        filter_kwargs = {}
+#         filter_kwargs = {}
 
-        # Dynamically build filter conditions based on query parameters
-        for key, value in query_params.items():
-            if key.endswith('_gt'):
-                field_name = key[:-3]  # Strip '_gt' to get the field name
-                filter_kwargs[f'{field_name}__gt'] = value
-            elif key.endswith('_gte'):
-                field_name = key[:-4]  # Strip '_gte' to get the field name
-                filter_kwargs[f'{field_name}__gt'] = value
-            elif key.endswith('_lt'):
-                field_name = key[:-3]  # Strip '_lt' to get the field name
-                filter_kwargs[f'{field_name}__lt'] = value
+#         # Dynamically build filter conditions based on query parameters
+#         for key, value in query_params.items():
+#             if key.endswith('_gt'):
+#                 field_name = key[:-3]  # Strip '_gt' to get the field name
+#                 filter_kwargs[f'{field_name}__gt'] = value
+#             elif key.endswith('_gte'):
+#                 field_name = key[:-4]  # Strip '_gte' to get the field name
+#                 filter_kwargs[f'{field_name}__gt'] = value
+#             elif key.endswith('_lt'):
+#                 field_name = key[:-3]  # Strip '_lt' to get the field name
+#                 filter_kwargs[f'{field_name}__lt'] = value
 
-        print("filter kwargs: ", filter_kwargs)
-        if serializer.is_valid(): 
-            print("serializer.validated_data: ", serializer.validated_data)
-            # parcel = Parcel.objects.filter(**serializer.validated_data)
-            parcel = Parcel.objects.filter(**filter_kwargs)
-            print("filtered parcels: ", parcel)
-            # parcel = Parcel.objects.all()            
-        else:
-            print(serializer.errors)
+#         print("filter kwargs: ", filter_kwargs)
+#         if serializer.is_valid(): 
+#             print("serializer.validated_data: ", serializer.validated_data)
+#             # parcel = Parcel.objects.filter(**serializer.validated_data)
+#             parcel = Parcel.objects.filter(**filter_kwargs)
+#             print("filtered parcels: ", parcel)
+#             # parcel = Parcel.objects.all()            
+#         else:
+#             print(serializer.errors)
 
-        # serializer = ParcelSerializer(data=request.data) # Only for POST?
-        response_serializer = ParcelSerializer(parcel, many=True)
-        return Response(response_serializer.data)
+#         # serializer = ParcelSerializer(data=request.data) # Only for POST?
+#         response_serializer = ParcelSerializer(parcel, many=True)
+#         return Response(response_serializer.data)
     
     # def put(self, request, pk, format=None):
     #     parcel = self.get_object(pk)
