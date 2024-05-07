@@ -1,139 +1,45 @@
 # APIViews
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import authentication, permissions
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
 from .models import Parcel
-from .serializers import ParcelSerializer
-from rest_framework import status
-from django.http import Http404
+from .serializers import ParcelSerializer, ParcelGeoSerializer
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import GEOSGeometry
 
 
-@csrf_exempt # TODO understand what this does
-def parcel_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        parcels = Parcel.objects.all()
-        serializer = ParcelSerializer(parcels, many=True)
-        print("serializer: ", serializer)
-        filtered_parcels = Parcel.objects.filter(area_sf__gt=10000)
-        new_serializer = ParcelSerializer(filtered_parcels, many=True)
-        # print("parcel: ", parcel)
+class ParcelList(APIView):
 
-        return JsonResponse(new_serializer.data, safe=False)  
+    def get(self, request):
+        query_params = request.query_params
+        serializer = ParcelSerializer(data=query_params)
+        if serializer.is_valid(): 
+            # print("serializer.validated_data: ", serializer.validated_data)
+            # print("serializer.area_sf: ", serializer.validated_data["area_sf"])
+            area_sf_value = serializer.validated_data["area_sf"]
+            height_m_value = serializer.validated_data["height_m"]
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ParcelSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
-
-# class ParcelList(APIView):
-#     """
-#     View to list all parcels in the system.
+        filtered_parcels = Parcel.objects.filter(area_sf__gte=area_sf_value).filter(height_m__gte=height_m_value)
+        serializer = ParcelSerializer(filtered_parcels, many=True)
+        return Response(serializer.data)
     
-#     """
-#     def get(self, request):
-#         parcels = Parcel.objects.all()
-#         serializer = ParcelSerializer(parcels, many=True)
-#         return Response(serializer.data)
+class LocateParcel(APIView):
     
-    
-# class ParcelDetailByKey(APIView):
-    
-#     def get(self, request, pk, format=None):
-#         parcel = Parcel.objects.get(pk=pk)
-#         serializer = ParcelSerializer(parcel)
-#         return Response(serializer.data)
-    
-# class ParcelFilter(APIView):
-    
-#     def get(self, request):
-#         query_params = request.query_params
-#         serializer = ParcelSerializer(data=query_params)
+    # def get(self, request):
+    #     query_params = request.query_params
+    #     serializer = ParcelSerializer(data=query_params)
+    #     if serializer.is_valid(): 
+    #         parcel_id = serializer.validated_data["id"]
+    #         print("serializer.validated_data: ", serializer.validated_data)
         
-#         filter_kwargs = {}
-
-#         # Dynamically build filter conditions based on query parameters
-#         for key, value in query_params.items():
-#             if key.endswith('_gt'):
-#                 field_name = key[:-3]  # Strip '_gt' to get the field name
-#                 filter_kwargs[f'{field_name}__gt'] = value
-#             elif key.endswith('_gte'):
-#                 field_name = key[:-4]  # Strip '_gte' to get the field name
-#                 filter_kwargs[f'{field_name}__gt'] = value
-#             elif key.endswith('_lt'):
-#                 field_name = key[:-3]  # Strip '_lt' to get the field name
-#                 filter_kwargs[f'{field_name}__lt'] = value
-
-#         print("filter kwargs: ", filter_kwargs)
-#         if serializer.is_valid(): 
-#             print("serializer.validated_data: ", serializer.validated_data)
-#             # parcel = Parcel.objects.filter(**serializer.validated_data)
-#             parcel = Parcel.objects.filter(**filter_kwargs)
-#             print("filtered parcels: ", parcel)
-#             # parcel = Parcel.objects.all()            
-#         else:
-#             print(serializer.errors)
-
-#         # serializer = ParcelSerializer(data=request.data) # Only for POST?
-#         response_serializer = ParcelSerializer(parcel, many=True)
-#         return Response(response_serializer.data)
+    #     filtered_parcels = Parcel.objects.filter(point__distance_lte=(id, 1000))
+    #     serializer = ParcelSerializer(filtered_parcels, many=True)
+    #     return Response(serializer.data)
     
-    # def put(self, request, pk, format=None):
-    #     parcel = self.get_object(pk)
-    #     serializer = ParcelSerializer(parcel, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # def delete(self, request, pk, format=None):
-    #     parcel = self.get_object(pk)
-    #     parcel.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-# Class based views
-################################################################################################
-
-# from django.shortcuts import render
-# from .models import Parcel
-# from rest_framework import generics
-# from .serializers import ParcelSerializer
-
-# class ParcelCreate(generics.CreateAPIView):
-#     # API endpoint that allows creation of a new Parcel
-#     queryset = Parcel.objects.all(),
-#     serializer_class = ParcelSerializer
-
-# class ParcelList(generics.ListAPIView):
-#     # API endpoint that allows Parcel to be viewed.
-#     queryset = Parcel.objects.all()
-#     serializer_class = ParcelSerializer
-
-# class ParcelDetail(generics.RetrieveAPIView):
-#     # API endpoint that returns a single Parcel by pk.
-#     queryset = Parcel.objects.all()
-#     serializer_class = ParcelSerializer
-    
-# class ParcelUpdate(generics.RetrieveUpdateAPIView):
-#     # API endpoint that allows a Parcel record to be updated.
-#     queryset = Parcel.objects.all()
-#     serializer_class = ParcelSerializer
-
-# class ParcelDelete(generics.RetrieveDestroyAPIView):
-#     # API endpoint that allows a Parcel record to be deleted.
-#     queryset = Parcel.objects.all()
-#     serializer_class = ParcelSerializer
-    
-
-
+    def get(self, request):
+        parcels = Parcel.objects.filter(id=1).filter(poly__distance_gt=(geom, D(m=50000)))
+        serializer = ParcelGeoSerializer(parcels, many=True)
+        return Response(serializer.data)
+            
 # Old below
 ################################################################################################
 from django.http import JsonResponse
