@@ -2038,3 +2038,132 @@ Traceback (most recent call last):
                                                                     ^^^^
 NameError: name 'geom' is not defined
 2024-05-07 20:08:38,941 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:11:53,113 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:12:01,877 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:12:04,929 - Internal Server Error: /LocateParcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 40, in get
+    reference_geom = parcel.geometry
+                     ^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'geometry'
+2024-05-07 20:13:30,507 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:13:36,240 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:13:47,057 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:13:53,126 - Internal Server Error: /LocateParcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 44, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework_gis/serializers.py", line 23, in data
+    return super(ListSerializer, self).data
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework_gis/serializers.py", line 32, in to_representation
+    ("features", super().to_representation(data)),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 713, in to_representation
+    return [
+           ^
+TypeError: 'Parcel' object is not iterable
+2024-05-07 20:14:40,358 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:14:42,781 - Internal Server Error: /LocateParcels/
+Traceback (most recent call last):
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/parcels/views.py", line 48, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework_gis/serializers.py", line 23, in data
+    return super(ListSerializer, self).data
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework_gis/serializers.py", line 32, in to_representation
+    ("features", super().to_representation(data)),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jimwei/Projects/RC Django API Exercise/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 713, in to_representation
+    return [
+           ^
+TypeError: 'Parcel' object is not iterable
+2024-05-07 20:14:51,296 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:15:11,550 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:15:22,581 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:15:42,837 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:15:52,822 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:16:04,805 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:16:40,202 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:16:49,009 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:16:56,763 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:16:59,432 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:17:52,374 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:18:55,537 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:19:09,470 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 20:20:23,492 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:21:44,617 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.

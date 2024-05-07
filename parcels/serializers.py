@@ -20,7 +20,8 @@ class ParcelSerializer(serializers.Serializer):
     type = serializers.CharField(required=False, allow_null=True)
     address = serializers.CharField(required=False, allow_null=True)
     # geometry = serializers.GeometryField(required=False, allow_null=True) # ? https://www.django-rest-framework.org/api-guide/fields/#django-rest-framework-gis
-    
+
+# Is there a choice to not use GeoFeatureModelSerializer?
 class ParcelGeoSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Parcel
