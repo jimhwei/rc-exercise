@@ -35,27 +35,31 @@ class LocateParcel(APIView):
     #     serializer = ParcelSerializer(filtered_parcels, many=True)
     #     return Response(serializer.data)
     
+    # can test with 43.64600, -79.39613
     def get(self, request):
         query_params = request.query_params
         serializer = ParcelSerializer(data=query_params)
         
-        parcel_id = request.query_params.get('id', None)
-        if not parcel_id:
-            pass
-        
-        print(serializer.is_valid())
-        print(serializer.errors)
         if serializer.is_valid(): 
-            print("serializer.validated_data: ", serializer.validated_data)
-            print("serializer.id: ", serializer.validated_data["id"])
-            id = serializer.validated_data["id"]
-
-        parcel = Parcel.objects.filter(id=parcel_id).first()
-        reference_geom = parcel.geometry        
-        nearby_parcels = Parcel.objects.filter(
-            geometry__distance_lte=(reference_geom, D(km=0.01))
-        )
+            dist = serializer.validated_data["dist"]
         
+            if "id" in serializer.validated_data:
+                parcel_id = serializer.validated_data["id"]
+                parcel = Parcel.objects.filter(id=parcel_id).first()
+                reference_geom = parcel.geometry        
+                nearby_parcels = Parcel.objects.filter(
+                geometry__distance_lte=(reference_geom, D(km=dist))
+            )
+        
+            else:
+                lat = serializer.validated_data["lat"]
+                lon = serializer.validated_data["lon"]
+                pnt = GEOSGeometry(f"POINT({lon} {lat})", srid=4326)
+                
+                nearby_parcels = Parcel.objects.filter(
+                geometry__distance_lte=(pnt, D(km=dist))
+            )
+            
         serializer = ParcelSerializer(nearby_parcels, many=True)
         return Response(serializer.data)
             
