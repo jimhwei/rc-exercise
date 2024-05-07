@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
+from rest_framework_gis.fields import GeometryField
 from .models import Parcel
 
 class ParcelSerializer(serializers.Serializer):
@@ -19,11 +20,11 @@ class ParcelSerializer(serializers.Serializer):
     # sold_per = serializers.FloatField(required=False, allow_null=True)
     type = serializers.CharField(required=False, allow_null=True)
     address = serializers.CharField(required=False, allow_null=True)
-    # geometry = serializers.GeometryField(required=False, allow_null=True) # ? https://www.django-rest-framework.org/api-guide/fields/#django-rest-framework-gis
+    geometry = GeometryField(required=False, allow_null=True) # ? https://www.django-rest-framework.org/api-guide/fields/#django-rest-framework-gis
 
-# Is there a choice to not use GeoFeatureModelSerializer?
-class ParcelGeoSerializer(GeoFeatureModelSerializer):
-    class Meta:
-        model = Parcel
-        fields = ('id', 'area_sf', 'height_m', 'geometry')  # Include your geometry field
-        geo_field = 'geometry'
+# # Is there a choice to not use GeoFeatureModelSerializer?
+# class ParcelGeoSerializer(GeoFeatureModelSerializer):
+#     class Meta:
+#         model = Parcel
+#         fields = ('id', 'area_sf', 'height_m', 'geometry') 
+#         geo_field = 'geometry'

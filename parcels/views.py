@@ -2,7 +2,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Parcel
-from .serializers import ParcelSerializer, ParcelGeoSerializer
+from .serializers import ParcelSerializer
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import GEOSGeometry
 
@@ -37,7 +37,11 @@ class LocateParcel(APIView):
     
     def get(self, request):
         query_params = request.query_params
-        serializer = ParcelGeoSerializer(data=query_params)
+        serializer = ParcelSerializer(data=query_params)
+        
+        parcel_id = request.query_params.get('id', None)
+        if not parcel_id:
+            pass
         
         print(serializer.is_valid())
         print(serializer.errors)
@@ -46,13 +50,13 @@ class LocateParcel(APIView):
             print("serializer.id: ", serializer.validated_data["id"])
             id = serializer.validated_data["id"]
 
-        parcel = Parcel.objects.filter(id=1).first()
+        parcel = Parcel.objects.filter(id=parcel_id).first()
         reference_geom = parcel.geometry        
         nearby_parcels = Parcel.objects.filter(
             geometry__distance_lte=(reference_geom, D(km=0.01))
         )
         
-        serializer = ParcelGeoSerializer(nearby_parcels, many=True)
+        serializer = ParcelSerializer(nearby_parcels, many=True)
         return Response(serializer.data)
             
 # Old below

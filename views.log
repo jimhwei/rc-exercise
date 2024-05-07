@@ -2167,3 +2167,15 @@ TypeError: 'Parcel' object is not iterable
 2024-05-07 20:19:09,470 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
 2024-05-07 20:20:23,492 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
 2024-05-07 20:21:44,617 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:24:22,826 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:24:32,583 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:24:49,063 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 20:54:11,247 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 21:11:53,211 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 21:14:53,037 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 21:16:45,302 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 21:16:56,127 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 21:17:34,626 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 21:17:57,870 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
+2024-05-07 21:18:05,646 - /Users/jimwei/Projects/RC Django API Exercise/parcels/serializers.py changed, reloading.
+2024-05-07 21:18:44,467 - /Users/jimwei/Projects/RC Django API Exercise/parcels/views.py changed, reloading.
