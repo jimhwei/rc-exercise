@@ -22,7 +22,7 @@ class ParcelList(APIView):
         serializer = ParcelSerializer(filtered_parcels, many=True)
         return Response(serializer.data)
     
-class LocateParcel(APIView):
+class LocateParcelById(APIView):
     
     # def get(self, request):
     #     query_params = request.query_params
@@ -41,22 +41,30 @@ class LocateParcel(APIView):
         serializer = ParcelSerializer(data=query_params)
         
         if serializer.is_valid(): 
+            parcel_id = serializer.validated_data["id"]
+            parcel = Parcel.objects.filter(id=parcel_id).first()
             dist = serializer.validated_data["dist"]
+            
+            reference_geom = parcel.geometry        
+            nearby_parcels = Parcel.objects.filter(
+            geometry__distance_lte=(reference_geom, D(km=dist)))    
+            serializer = ParcelSerializer(nearby_parcels, many=True)
+            return Response(serializer.data)
+    
+class LocateParcelByCoordinates(APIView):
+    
+    # can test with 43.64600, -79.39613
+    def get(self, request):
+        query_params = request.query_params
+        serializer = ParcelSerializer(data=query_params)
         
-            if "id" in serializer.validated_data:
-                parcel_id = serializer.validated_data["id"]
-                parcel = Parcel.objects.filter(id=parcel_id).first()
-                reference_geom = parcel.geometry        
-                nearby_parcels = Parcel.objects.filter(
-                geometry__distance_lte=(reference_geom, D(km=dist))
-            )
-        
-            else:
-                lat = serializer.validated_data["lat"]
-                lon = serializer.validated_data["lon"]
-                pnt = GEOSGeometry(f"POINT({lon} {lat})", srid=4326)
-                
-                nearby_parcels = Parcel.objects.filter(
+        if serializer.is_valid(): 
+            lat = serializer.validated_data["lat"]
+            lon = serializer.validated_data["lon"]
+            pnt = GEOSGeometry(f"POINT({lon} {lat})", srid=4326)
+            dist = serializer.validated_data["dist"]
+            
+            nearby_parcels = Parcel.objects.filter(
                 geometry__distance_lte=(pnt, D(km=dist))
             )
             
