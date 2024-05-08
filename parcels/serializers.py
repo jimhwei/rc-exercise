@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from rest_framework_gis.fields import GeometryField
-from .models import Parcel
 
 class ParcelSerializer(serializers.Serializer):
     id = serializers.CharField(required=False, allow_null=True)
@@ -16,11 +14,3 @@ class ParcelSerializer(serializers.Serializer):
     lat = serializers.FloatField(required=False, allow_null=True)
     lon = serializers.FloatField(required=False, allow_null=True)
     dist = serializers.FloatField(required=False, allow_null=True)
-    
-
-# # Is there a choice to not use GeoFeatureModelSerializer?
-# class ParcelGeoSerializer(GeoFeatureModelSerializer):
-#     class Meta:
-#         model = Parcel
-#         fields = ('id', 'area_sf', 'height_m', 'geometry') 
-#         geo_field = 'geometry'
