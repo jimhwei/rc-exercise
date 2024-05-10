@@ -47,18 +47,7 @@ class LocateParcelById(APIView):
     
     # Can test with http://127.0.0.1:8000/parcels/locate/1?dist=10
     def get(self, request, id):
-        
-        # query_params = request.query_params
-        # serializer = ParcelSerializer(data=query_params)
-        
-        # if not serializer.is_valid():
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        # dist = serializer.validated_data["dist"]
-        
-
         filtered_parcel = Parcel.objects.filter(id=id).first()
-        
         if not filtered_parcel:
             return Response("error: no record found", status=status.HTTP_404_NOT_FOUND)
         
@@ -67,13 +56,6 @@ class LocateParcelById(APIView):
             return Response("error: no distance entered", status=status.HTTP_400_BAD_REQUEST)
             
         reference_geom = filtered_parcel.geometry
-        # poly = GEOSGeometry(f"POINT({reference_geom})", srid=4326)
-        
-        print("reference_geom: ", reference_geom)
-        print("type of reference_geom: ", type(reference_geom))
-        # serializer = ParcelSerializer(filtered_parcel)
-        # return Response(serializer.data)
-        
         nearby_parcels = Parcel.objects.filter(
             geometry__distance_lte=(reference_geom, D(km=float(dist))))    
         serializer = ParcelSerializer(nearby_parcels, many=True)
@@ -93,8 +75,6 @@ class LocateParcelByCoordinates(APIView):
         lat = serializer.validated_data["lat"]
         lon = serializer.validated_data["lon"]
         pnt = GEOSGeometry(f"POINT({lon} {lat})", srid=4326)
-        print("pnt geom: ", pnt)
-        print("type of pnt: ", type(pnt))
         dist = serializer.validated_data["dist"]
         
         nearby_parcels = Parcel.objects.filter(
@@ -103,3 +83,10 @@ class LocateParcelByCoordinates(APIView):
             
         serializer = ParcelSerializer(nearby_parcels, many=True)
         return Response(serializer.data)
+    
+# Notes:
+# reference_geom:  SRID=4326;MULTIPOLYGON (((-79.40087676853099 43.64868440553216, -79.3999790463937 43.64886573351353, -79.39984676614499 43.64848821460149, -79.40073408421777 43.6483009414404, -79.40087676853099 43.64868440553216)))
+# type of reference_geom:  <class 'django.contrib.gis.geos.collections.MultiPolygon'>
+
+# pnt geom:  SRID=4326;POINT (-79.39613 43.646)
+# type of pnt:  <class 'django.contrib.gis.geos.point.Point'>
