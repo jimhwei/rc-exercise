@@ -1,17 +1,14 @@
-from django.urls import include, path
-# from .views import ParcelCreate, ParcelList, ParcelDetail, ParcelUpdate, ParcelDelete
-from .views import ParcelList, ParcelDetailByKey, ParcelFilter
+from django.urls import path
+from .views import ParcelList, ParcelFilter, LocateParcelById, LocateParcelByCoordinates
 
 urlpatterns = [
-    # path('create/', ParcelCreate.as_view(), name='create-Parcel'),
-    # path('', ParcelList.as_view()),
-    # path('<int:pk>/', ParcelDetail.as_view(), name='retrieve-Parcel'),
-    # path('update/<int:pk>/', ParcelUpdate.as_view(), name='update-Parcel'),
-    # path('delete/<int:pk>/', ParcelDelete.as_view(), name='delete-Parcel')
-    
     path('parcels/', ParcelList.as_view()),
-    path('parcelsid/<int:pk>/', ParcelDetailByKey.as_view()),
-    path('parcelsfilter/', ParcelFilter.as_view()),
-    
-
+    path('parcels/filter', ParcelFilter.as_view()),
+    path('parcels/locate/<int:id>', LocateParcelById.as_view()), #TODO should be getting from URL
+    path('parcels/locate/point', LocateParcelByCoordinates.as_view()),
 ]
+
+# parcels/locate
+# parcels/id
+
+# Obfuscate

@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 
-# Create your tests here.
+# Create your tests here. TODO Update tests using Pytest
 
 class FilterParcelsByFeatureTests(TestCase):
     

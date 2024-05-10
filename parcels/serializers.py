@@ -1,19 +1,16 @@
 from rest_framework import serializers
-from .models import Parcel
+from rest_framework_gis.fields import GeometryField
 
-# Serialization helps convert Python Objects to JSON outputs
-class ParcelSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Parcel
-
-        # fields = ["proj_name", "status", 'geometry']
-        
-        # fields = ["id","proj_name","status","geometry","address","area","area_sf",
-        #           "building_f","density","gfa_sf","height_m","price","sold_per","storey","type",
-        #           "units"]
-        
-        fields = '__all__'
-        extra_kwargs = {
-            'id' : {'required': False},
-        }
+class ParcelSerializer(serializers.Serializer):
+    id = serializers.CharField(required=False, allow_null=True)
+    area_sf = serializers.FloatField(required=False, allow_null=True)
+    height_m = serializers.FloatField(required=False, allow_null=True)
+    proj_name = serializers.CharField(required=False, allow_null=True)
+    status = serializers.CharField(required=False, allow_null=True)
+    height_m = serializers.FloatField(required=False, allow_null=True)
+    type = serializers.CharField(required=False, allow_null=True)
+    address = serializers.CharField(required=False, allow_null=True)
+    geometry = GeometryField(required=False, allow_null=True)
+    lat = serializers.FloatField(required=False, allow_null=True)
+    lon = serializers.FloatField(required=False, allow_null=True)
+    dist = serializers.FloatField(required=False, allow_null=True)
