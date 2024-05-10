@@ -71,14 +71,14 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
         'django.db.backends': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'handlers': ['console'],
         }
     }
