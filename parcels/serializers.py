@@ -8,7 +8,7 @@ class ParcelSerializer(serializers.Serializer):
     proj_name = serializers.CharField(required=False, allow_null=True)
     status = serializers.CharField(required=False, allow_null=True)
     height_m = serializers.FloatField(required=False, allow_null=True)
-    type = serializers.CharField(required=False, allow_null=True)
+    parcel_type = serializers.CharField(required=False, allow_null=True)
     address = serializers.CharField(required=False, allow_null=True)
     geometry = GeometryField(required=False, allow_null=True)
     lat = serializers.FloatField(required=False, allow_null=True)
