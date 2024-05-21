@@ -9,14 +9,14 @@ from django.contrib.gis.geos import GEOSGeometry
 from rest_framework.pagination import LimitOffsetPagination
 
 
-class ParcelList(APIView):
+# class ParcelList(APIView):
 
-    def get(self, request):
-        parcels = Parcel.objects.all()
-        paginator = LimitOffsetPagination()
-        result_page = paginator.paginate_queryset(parcels, request)
-        serializer = ParcelSerializer(result_page, many=True, context={'request':request})
-        return paginator.get_paginated_response(serializer.data) # This allows next and previous links
+#     def get(self, request):
+#         parcels = Parcel.objects.all()
+#         paginator = LimitOffsetPagination()
+#         result_page = paginator.paginate_queryset(parcels, request)
+#         serializer = ParcelSerializer(result_page, many=True, context={'request':request})
+#         return paginator.get_paginated_response(serializer.data) # This allows next and previous links
 
 
 class ParcelFilter(APIView):
