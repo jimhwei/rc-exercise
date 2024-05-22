@@ -5,24 +5,38 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 
-@pytest.mark.django_db
-def test_parcel_not_None():
-    parcel = Parcel.objects.create(proj_name='Test Parcels')
-    assert parcel.proj_name == "Test Parcels"    
-    
-@pytest.mark.django_db
-def test_parcel_filter():
+@pytest.fixture
+def parcel_A(db) -> Parcel:
+    return Parcel.objects.create(proj_name='Parcel A', area_sf=500, height_m=10)
+
+@pytest.fixture
+def expected_parcel_data(parcel_A):
+    return{
+        'id': parcel_A.id, 
+        'area_sf': parcel_A.area_sf, 
+        'proj_name': parcel_A.proj_name, 
+        'status': parcel_A.status, 
+        'height_m': parcel_A.height_m, 
+        'parcel_type': parcel_A.parcel_type, 
+        'address': parcel_A.address, 
+        'geometry': parcel_A.geometry, 
+        'lat': None, 
+        'lon': None, 
+        'dist': None}
+
+def test_parcel_filter(db, parcel_A, expected_parcel_data):
     client = APIClient()
     url = reverse('parcels-filter')
     response = client.get(url, {'area_sf': 500, 'height_m': 10})
-    
     assert response.status_code == status.HTTP_200_OK
-    assert len(response.data['results']) <= 10
+    assert response.data['results'] == [expected_parcel_data]
 
+    # assert len(response.data['results']) <= 10
 
-# def test_should_create_user_with_username(db) -> None:
-#     user = User.objects.create_user("Haki")
-#     assert user.username == "Haki"
+def test_valid_parcel_serializer(db, parcel_A, expected_parcel_data):
+    serializer = ParcelSerializer(parcel_A)
+    assert serializer.data == expected_parcel_data
+
 
 # Old Below
 # # from django.test import TestCase, Client
