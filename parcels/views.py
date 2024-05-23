@@ -3,20 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Parcel
-from .serializers import ParcelSerializer
+from .serializers import ParcelSerializer, LocateParcelSerializer
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import GEOSGeometry
 from rest_framework.pagination import LimitOffsetPagination
-
-
-# class ParcelList(APIView):
-
-#     def get(self, request):
-#         parcels = Parcel.objects.all()
-#         paginator = LimitOffsetPagination()
-#         result_page = paginator.paginate_queryset(parcels, request)
-#         serializer = ParcelSerializer(result_page, many=True, context={'request':request})
-#         return paginator.get_paginated_response(serializer.data) # This allows next and previous links
 
 
 class ParcelFilter(APIView):
@@ -54,7 +44,8 @@ class LocateParcelById(APIView):
         dist = request.GET.get('dist')
         if not dist:
             return Response("error: no distance entered", status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        print("dist:", dist)
         reference_geom = filtered_parcel.geometry
         nearby_parcels = Parcel.objects.filter(
             geometry__distance_lte=(reference_geom, D(km=float(dist))))    
@@ -64,10 +55,10 @@ class LocateParcelById(APIView):
     
 class LocateParcelByCoordinates(APIView):
     
-    # http://127.0.0.1:8000/parcels/locate/point?lat=43.64600&lon=-79.39613&dist=10
+    # http://127.0.0.1:8000/parcels/locate/coordinates?lat=43.64600&lon=-79.39613&dist=10
     def get(self, request):
         query_params = request.query_params
-        serializer = ParcelSerializer(data=query_params)
+        serializer = LocateParcelSerializer(data=query_params)
         
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

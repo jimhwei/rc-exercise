@@ -11,6 +11,8 @@ class ParcelSerializer(serializers.Serializer):
     parcel_type = serializers.CharField(required=False, allow_null=True)
     address = serializers.CharField(required=False, allow_null=True)
     geometry = GeometryField(required=False, allow_null=True)
+
+class LocateParcelSerializer(serializers.Serializer):
     lat = serializers.FloatField(required=False, allow_null=True)
     lon = serializers.FloatField(required=False, allow_null=True)
-    dist = serializers.FloatField(required=False, allow_null=True)
+    dist = serializers.FloatField(required=True, min_value=0.01)

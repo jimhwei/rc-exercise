@@ -3,11 +3,6 @@ from .views import ParcelFilter, LocateParcelById, LocateParcelByCoordinates
 
 urlpatterns = [
     path('parcels/filter', ParcelFilter.as_view(), name='parcels-filter'),
-    path('parcels/locate/<int:id>', LocateParcelById.as_view()), #getting id from URL
-    path('parcels/locate/point', LocateParcelByCoordinates.as_view()),
+    path('parcels/locate/<int:id>', LocateParcelById.as_view(), name='locate-parcels-by-id'), #getting id from URL
+    path('parcels/locate/coordinates', LocateParcelByCoordinates.as_view(), name='locate-parcels-by-coordinates'),
 ]
-
-# parcels/locate
-# parcels/id
-
-# Obfuscate
