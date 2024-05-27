@@ -3,31 +3,41 @@ import pytest
 from .models import Parcel
 from .serializers import ParcelSerializer
 from django.urls import reverse
-from rest_framework.test import APIClient
 from rest_framework import status
-from django.contrib.gis.geos import GEOSGeometry, MultiPolygon
+from django.contrib.gis.geos import GEOSGeometry
+from django.forms.models import model_to_dict
 
-    
-# geometry={"type":"MultiPolygon","coordinates":[[[[-79.40087676853099,43.64868440553216],[-79.3999790463937,43.64886573351353],[-79.39984676614499,43.64848821460149],[-79.40073408421777,43.6483009414404],[-79.40087676853099,43.64868440553216]]]]}
-    
-# geojson_str = json.dumps(geometry)
-# # geom = MultiPolygon(GEOSGeometry(geojson_str))
 
 @pytest.fixture
 def parcel_A(db) -> Parcel:
-    return Parcel.objects.create(id='1', proj_name='Parcel A', area_sf=500, height_m=10, geometry=MultiPolygon())
+    geojson_dict={"type":"MultiPolygon","coordinates":[[[[-79.40087676853099,43.64868440553216],[-79.3999790463937,43.64886573351353],[-79.39984676614499,43.64848821460149],[-79.40073408421777,43.6483009414404],[-79.40087676853099,43.64868440553216]]]]}
+    geojson_str = json.dumps(geojson_dict)
+    geom = GEOSGeometry(geojson_str)
+    return Parcel.objects.create(
+        id='1', 
+        area_sf=500, 
+        height_m=10, 
+        proj_name='Parcel A', 
+        status='',
+        parcel_type='',
+        address='',
+        area=0.0,
+        building_f=0.0,
+        density=0.0,
+        gfa_sf=0.0,
+        price=0.0,
+        sold_per=0.0,
+        storey=0.0,
+        units=0.0,
+        geometry=geom)
 
 def parcel_converter(parcel):
-    return{
-        'id': parcel.id, 
-        'area_sf': parcel.area_sf, 
-        'proj_name': parcel.proj_name, 
-        'status': parcel.status, 
-        'height_m': parcel.height_m, 
-        'parcel_type': parcel.parcel_type, 
-        'address': parcel.address, 
-        'geometry': parcel.geometry, 
-        }
+    serializer = ParcelSerializer(parcel)
+    converted_parcel = model_to_dict(parcel)
+    print('parcel_conversion: ', converted_parcel['geometry'])
+    print('serializer: ', serializer.data['geometry'])
+    converted_parcel['geometry'] = serializer.data['geometry']
+    return converted_parcel
     
 def test_valid_parcel_serializer(db, parcel_A):
     '''Testing serializer/business logic '''
@@ -35,7 +45,6 @@ def test_valid_parcel_serializer(db, parcel_A):
     assert serializer.data == parcel_converter(parcel_A)
 
 def test_parcel_filter(db, client, parcel_A):
-    # 
     url = reverse('parcels-filter')
     response = client.get(url, {'area_sf': 500, 'height_m': 10})
     assert response.status_code == status.HTTP_200_OK
@@ -45,26 +54,24 @@ def test_parcel_filter(db, client, parcel_A):
 def test_locate_by_parcel_id(db, client, parcel_A):
     print("Parcel ID:", parcel_A.id)
     url = reverse('locate-parcels-by-id', kwargs={'id': parcel_A.id})
-    print("URL:", url)
+    # print("URL:", url)
     response = client.get(url, {'dist': 0.2}) 
-    
-    print("Response:", response.data)
+    # print("Response: data", response.data)
     assert response.status_code == status.HTTP_200_OK
+    assert response.data == [parcel_converter(parcel_A)]
 
 def test_locate_by_coordinates(client, db, parcel_A):
-    
     url = reverse('locate-parcels-by-coordinates')
     response = client.get(url, {'lat': 43.64600, 'lon': -79.39613, 'dist':10})
     print("Response:", response.data)
     assert response.status_code == status.HTTP_200_OK # TODO specify a response body that is expected
+    assert response.data == [parcel_converter(parcel_A)]
 
 def test_locate_by_coordinates_dist_error(client, db, parcel_A):
-    
     url = reverse('locate-parcels-by-coordinates')
     response = client.get(url, {'lat': 43.64600, 'lon': -79.39613, 'dist':-1})
     print("Response:", response.data)
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-
 
 # Old Below
 # # from django.test import TestCase, Client
